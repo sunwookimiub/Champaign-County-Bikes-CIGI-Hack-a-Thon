@@ -26,7 +26,7 @@ Detals can be found here, https://github.com/Project-OSRM/osrm-backend/wiki/Serv
 `- osrm-routed`
 
 ## How to prepare data and start service? ##
-Step 1. Download OSM data from http://download.geofabrik.de or other OSM data provider, pbf and osm format are preferred
+Step 1. Download OSM data from http://download.geofabrik.de or other OSM data provider, pbf and osm format are preferred. The data need to be stored in `/opt/sw/osrm-backend/data/`
 
 Step 2. Configure routing profiles which determines what can be routed along. In this study, we use bicycle.lua as the routing profile. Then make symbolic link with the following command
 
@@ -40,7 +40,7 @@ Step 3. Run osrm-extract and osrm-prepare binaries to prepare addtional files fo
 
 `./osrm-prepare map.osrm`
 	
-*depending on the data size, this two steps might take up to hours*
+*depending on the data size, these two steps might take up to hours*
 
 Step 4. Start the routing service with the following command,
 
