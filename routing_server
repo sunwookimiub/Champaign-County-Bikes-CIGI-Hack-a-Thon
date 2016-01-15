@@ -1,29 +1,29 @@
-#Routing Service for Hackathon:#
+# Routing Service for Hackathon: #
 
-##Server address##
+## Server address ##
 http://141.142.168.53:5000/
 
-##How to use?##
+## How to use? ##
 http://141.142.168.53:5000/viaroute?loc=lat1,lon1&loc=lat2,lon2&instructions=true
 * Multiple via points are allowed.
 * More details about query parameters can be found here, https://github.com/Project-OSRM/osrm-backend/wiki/Server-api
 
-##How to interprete response?##
+## How to interprete response? ##
 Detals can be found here, https://github.com/Project-OSRM/osrm-backend/wiki/Server-api, Response section 
 
-##Where is it installed?##
+## Where is it installed? ##
 /opt/sw/osrm-backend/
 
-##Where is OSM data stored?##
+## Where is OSM data stored? ##
 /opt/sw/osrm-backend/data/
 
-##What are the main binaries?##
+## What are the main binaries? ##
 /opt/sw/osrm-backend/build/
 - osrm-prepare
 - osrm-extract
 - osrm-routed
 
-##How to prepare data and start service?##
+## How to prepare data and start service? ##
 Step 1. Download OSM data from http://download.geofabrik.de or other OSM data provider, pbf and osm format are preferred
 Step 2. Configure routing profiles which determines what can be routed along. In this study, we use bicycle.lua as the routing profile. Then make symbolic link with the following command
 	ln -s ../profiles/bicycle.lua profile.lua
