@@ -5,6 +5,7 @@ http://141.142.168.53:5000/
 
 ## How to use? ##
 http://141.142.168.53:5000/viaroute?loc=lat1,lon1&loc=lat2,lon2&instructions=true
+
 * Multiple via points are allowed.
 * More details about query parameters can be found here, https://github.com/Project-OSRM/osrm-backend/wiki/Server-api
 
@@ -31,6 +32,7 @@ Step 2. Configure routing profiles which determines what can be routed along. In
 Step 3. Run osrm-extract and osrm-prepare binaries to prepare addtional files for routing.
 	./osrm-extract map.osm
 	./osrm-prepare map.osrm
+	
 	* depending on the data size, this two steps might take up to hours
 Step 4. Start the routing service with the following command,
 	./osrm-routed map.osrm
