@@ -13,8 +13,8 @@
 
     <!-- Chrome for Android - NEW! -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="../images/brand.png">
-    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/brand.png">
+    <link rel="shortcut icon" href="images/favicon.ico">
 
     <title>CIGI Cycle Map</title>
 
@@ -22,11 +22,11 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="dist/css/style.css" rel="stylesheet">
 
     <!-- Bootstrap-map-js -->
     <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.13/esri/css/esri.css">   
-    <link rel="stylesheet" type="text/css" href="bootstrapmap.min.css">   
+    <link rel="stylesheet" type="text/css" href="dist/css/bootstrapmap.min.css">   
 
     <style type="text/css">
 
@@ -43,6 +43,9 @@
       <script src="../bootstrap_v3/docs-assets/js/respond.min.js"></script>
     <![endif]-->
 
+    <!-- load jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
   </head>
 
   <body>
@@ -50,13 +53,39 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="http://www.champaigncountybikes.org"><img class="navbar-brand-image" src="../images/brand.png">Cycle Map</a>
+          <a class="navbar-brand" href="http://www.champaigncountybikes.org"><img class="navbar-brand-image" src="images/brand.png">Cycle Map</a>
+
+          <!-- all the possible buttons -->
+          <ul class="nav navbar-nav">
+            <li><a id="first-btn" onclick="ui_first_button_handler(event);">Clear</a></li>
+          </ul>
         </div>
       </div>
     </div>
 
+    <script type='text/javascript'>
+        function ui_first_button_handler(evt) {
+            // set first-bt to done and second button to cancel
+            current = evt.target.text;
+            if (current == "Clear") {
+		// clear graphics layer
+		map.graphics.clear();
+		// remove points from route
+		route_points = [];
+		prevMapPoint = null;
+		num_points = 0;
+		// kill elevation iframe
+		$('#elevation_chart').empty();
+		old_height = $('#mapDiv').css("height");
+		$('#mapDiv').css({height: old_height.substr(0, old_height.length - 2)*1 + 150 + "px"});
+            };
+        }
+    </script>
+
     <!-- Bootstrap-map-js -->
     <div id="mapDiv"></div>
+    <div id="elevation_chart"></div>
+    
     <script type="text/javascript">
         var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
         var dojoConfig = {
@@ -64,7 +93,7 @@
             // enabling us to load the api from a CDN and load local modules from the correct location.
             packages: [{
                 name: "application",
-                location: package_path + '../../../src/js'
+                location: package_path + '/dist/js'
             }, {
                 name: "bootstrap",
                 location: "//rawgit.com/xsokev/Dojo-Bootstrap/master"
@@ -72,22 +101,11 @@
         };
     </script>
     <script src="//js.arcgis.com/3.13compact"></script>
-    <script>
-        require(["esri/map", "esri/dijit/Scalebar", "application/bootstrapmap", "dojo/query", "dojo/touch", "bootstrap/Collapse", "bootstrap/Dropdown", "dojo/domReady!"], 
-          function(Map, Scalebar, BootstrapMap, query, touch) {
-            // Get a reference to the ArcGIS Map class
-            var map = BootstrapMap.create("mapDiv",{
-              basemap:"osm",
-              center:[-88.272778, 40.115],
-              zoom:12
-            });
-
-            var scalebar = new Scalebar({
-              map: map,
-              scalebarUnit: "dual"
-            });
-
-        });
-    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script> 
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+    <script src="route.js"></script>    
+    <script src="mymap_hh.js"></script>  
+    <script src="elevation.js"></script>
   </body>
 </html>
